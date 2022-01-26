@@ -1,0 +1,50 @@
+spring:
+  cloud:
+    azure:
+      eventhub:
+        connection-string: Endpoint=sb://cdcpoctest.servicebus.windows.net/;SharedAccessKeyName=cdc;SharedAccessKey=lpcspL47uq6QF90YiAbXi8S0WLAKY95Szn2XLL3ifCY=;EntityPath=cdceh
+        checkpoint-storage-account: cdcfunctionstorage
+        checkpoint-access-key: ToIO5vRMPCL6OpNn4uSUonJp3lo1O9rnU3ojNboQBAQYcxhIFNtPHiNyAqsUvsizi3VA3KoXejniXCGEJeJ4hA==
+        checkpoint-container: cdcpoc
+
+    stream:
+      bindings:
+        consume-in-0:
+          destination: cdceh
+          group: $Default
+        supply-out-0:
+          destination: cdceh
+
+      eventhub:
+        bindings:
+          consume-in-0:
+            consumer:
+              checkpoint-mode: MANUAL
+      function:
+        definition: supply;
+      poller:
+        initial-delay: 0
+        fixed-delay: 1000
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+        type: trace
+
+  datasource:
+    url: jdbc:sqlserver://cdcpocsqlsvr1.database.windows.net;databaseName=cdcdb
+    username: CDC-Admin
+    password: 4-v3ry-53cr37-P455w0rd
+
+azure:
+  application-insights:
+    instrumentation-key: 9656ef5f-9a12-4625-b53c-7aeec63f87a6
+
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace
+
