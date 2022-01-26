@@ -2,7 +2,7 @@ spring:
   cloud:
     azure:
       eventhub:
-        connection-string: Endpoint=sb://cdcpoctest.servicebus.windows.net/;SharedAccessKeyName=cdc;SharedAccessKey=lpcspL47uq6QF90YiAbXi8S0WLAKY95Szn2XLL3ifCY=;EntityPath=cdceh
+        connection-string: Endpoint=sb://cdcehnamespace1.servicebus.windows.net/;SharedAccessKeyName=cdcehnauthrule1;SharedAccessKey=6Gf7HPJZ/FMK/tYUsglJZfsnBn40hw+wNHRwbgn3QNA=;EntityPath=cdceh1
         checkpoint-storage-account: cdcfunctionstorage
         checkpoint-access-key: ToIO5vRMPCL6OpNn4uSUonJp3lo1O9rnU3ojNboQBAQYcxhIFNtPHiNyAqsUvsizi3VA3KoXejniXCGEJeJ4hA==
         checkpoint-container: cdcpoc
@@ -10,10 +10,10 @@ spring:
     stream:
       bindings:
         consume-in-0:
-          destination: cdceh
+          destination: cdceh1
           group: $Default
         supply-out-0:
-          destination: cdceh
+          destination: cdceh1
 
       eventhub:
         bindings:
